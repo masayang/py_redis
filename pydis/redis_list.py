@@ -3,7 +3,7 @@ from . import RedisObject
 class RedisList(RedisObject):
     '''An equivalent to list where all items are stored in Redis.'''
 
-    def __init__(self, id=None, item_type=str, items=None, *args, **kwargs):
+    def __init__(self, id=None, item_type=str, items=None):
         '''
         Create a new RedisList
         id: If specified, use this as the redis ID, otherwise generate a random ID.
@@ -11,7 +11,7 @@ class RedisList(RedisObject):
         values: Default values to store during construction.
         '''
 
-        super(RedisList, self).__init__(id, *args, **kwargs)
+        super(RedisList, self).__init__(id)
         self.item_type = item_type
 
         if items:

@@ -13,8 +13,8 @@ class TestRedisList(unittest.TestCase):
 
     def test_constructor_without_items(self):
         with patch.object(RedisObject, '__init__') as init:
-            l = RedisList(id="xxx", host="127.0.0.1")
-            init.assert_called_with('xxx', host="127.0.0.1")
+            l = RedisList(id="xxx")
+            init.assert_called_with('xxx')
             self.assertEqual(l.item_type, str)
 
     def test_constructor_with_items(self):

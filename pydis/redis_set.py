@@ -1,8 +1,8 @@
 from . import RedisObject
 
 class RedisSet(RedisObject):
-    def __init__(self, id=None, item_type=str, items=None, *args):
-        super(RedisSet, self).__init__(id, *args)
+    def __init__(self, id=None, item_type=str, items=None):
+        super(RedisSet, self).__init__(id)
         self.item_type = item_type
 
         if items:
@@ -36,6 +36,9 @@ class RedisSet(RedisObject):
 
     def pop(self, number=1):
         return self.redis.spop(self.id, number)
+
+    def members(self):
+        return self.redis.smembers(self.id)
 
 '''
 SDIFF

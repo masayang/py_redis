@@ -2,3 +2,4 @@
 cover/
 .idea/
 *.pyc
+.env

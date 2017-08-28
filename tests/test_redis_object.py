@@ -2,6 +2,7 @@ import unittest
 from ..pydis import RedisObject
 from mock import patch
 from redis import StrictRedis
+from ..pydis.redis_object import redis_config
 
 class TestRedisObject(unittest.TestCase):
     def setUp(self):
@@ -14,15 +15,27 @@ class TestRedisObject(unittest.TestCase):
     @patch('redis.StrictRedis')
     def test_constructor_without_id(self, StrictRedis, urandom):
         urandom.return_value = '\xd8X\xfa@\x97\x90\x00dr'
-        r = RedisObject(db=1, host='some.host', password='secret', port=11111)
-        StrictRedis.assert_called_with(db=1, decode_responses=True, host='some.host', password='secret', port=11111)
-        self.assertEqual(r.id, u'RedisObject:2Fj6QJeQAGRy')
+        with patch.dict(redis_config, {
+            "host": "some.redis.host",
+            "port": 11111,
+            "db": 0,
+            "password": "password"
+        }, clear=True):
+            r = RedisObject()
+            StrictRedis.assert_called_with(db=0, decode_responses=True, host='some.redis.host', password='password', port=11111)
+            self.assertEqual(r.id, u'RedisObject:2Fj6QJeQAGRy')
 
     @patch('redis.StrictRedis')
     def test_constructor_with_id(self, StrictRedis):
-        r = RedisObject(id='i_have_an_id')
-        StrictRedis.assert_called_with(db=0, decode_responses=True, host='localhost', password=None, port=6379)
-        self.assertEqual(r.id, 'RedisObject:i_have_an_id')
+        with patch.dict(redis_config, {
+            "host": "some.redis.host",
+            "port": 11111,
+            "db": 0,
+            "password": "password"
+        }, clear=True):
+            r = RedisObject(id='i_have_an_id')
+            StrictRedis.assert_called_with(db=0, decode_responses=True, host='some.redis.host', password='password', port=11111)
+            self.assertEqual(r.id, 'RedisObject:i_have_an_id')
 
     def test_bool(self):
         with patch.object(StrictRedis, 'exists') as new_exists:
@@ -68,4 +81,4 @@ class TestRedisObject(unittest.TestCase):
 
     def test_encode_decode_none(self):
         encoded = RedisObject.encode_value(None)
-        self.assertEqual('', RedisObject.decode_value(str, encoded))
+        self.assertEqual('None', RedisObject.decode_value(str, encoded))

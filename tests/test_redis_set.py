@@ -17,12 +17,12 @@ class TestRedisSet(unittest.TestCase):
 
     @patch('redis.StrictRedis')
     def test_constructor_with_items(self, StrictRedis):
-        s = RedisSet('test_set', ('a', 'b', 'c'))
+        s = RedisSet('test_set', items=set(['a', 'b', 'c']))
         s.redis.sadd.assert_has_calls([
             call('RedisSet:test_set', 'a'),
             call('RedisSet:test_set', 'b'),
             call('RedisSet:test_set', 'c')
-        ])
+        ], any_order=True)
 
     @patch('redis.StrictRedis')
     def test_len(self, StrictRedis):

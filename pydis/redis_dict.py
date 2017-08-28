@@ -3,7 +3,7 @@ from . import RedisObject
 class RedisDict(RedisObject):
     '''An equivalent to dict where all keys/values are stored in Redis.'''
 
-    def __init__(self, id=None, fields={}, defaults=None, *args, **kwargs):
+    def __init__(self, id=None, fields={}, defaults=None):
         '''
         Create a new RedisObject
         id: If specified, use this as the redis ID, otherwise generate a random ID.
@@ -13,7 +13,7 @@ class RedisDict(RedisObject):
         defaults: A map of field name to values to store when constructing the object.
         '''
 
-        super(RedisDict, self).__init__(id, *args, **kwargs)
+        super(RedisDict, self).__init__(id)
         self.fields = fields
         if defaults:
             for key, val in defaults.items():

@@ -1,6 +1,8 @@
 import base64
 import redis
 import os
+from .redis_settings import redis_config
+
 
 class RedisObject(object):
     '''
@@ -8,13 +10,13 @@ class RedisObject(object):
     Genrally, use RedisDict or RedisList rather than this directly.
     '''
 
-    def __init__(self, id=None, host='localhost', port=6379, db=0, password=None):
+    def __init__(self, id=None):
         '''Create or load a RedisObject.'''
         self.redis = redis.StrictRedis(
-            host=host,
-            port=port,
-            db=db,
-            password=password,
+            host=redis_config['host'],
+            port=redis_config['port'],
+            db=redis_config['db'],
+            password=redis_config['password'],
             decode_responses=True)
 
         if id:
@@ -31,7 +33,10 @@ class RedisObject(object):
 
     def __eq__(self, other):
         '''Tests if two redis objects are equal (they have the same key)'''
-        return self.id == other.id
+        try:
+            return self.id == other.id
+        except AttributeError as e:
+            return False
 
     def __str__(self):
         '''Return this object as a string for testing purposes.'''

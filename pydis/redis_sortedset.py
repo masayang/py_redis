@@ -1,8 +1,8 @@
 from . import RedisObject
 
 class RedisSortedSet(RedisObject):
-    def __init__(self, id=None, init_scores=None, *args, **kwargs):
-        super(RedisSortedSet, self).__init__(id, *args, **kwargs)
+    def __init__(self, id=None, init_scores=None):
+        super(RedisSortedSet, self).__init__(id)
 
         if init_scores:
             for key in init_scores.keys():
