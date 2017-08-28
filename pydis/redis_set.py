@@ -1,17 +1,18 @@
 from . import RedisObject
 
 class RedisSet(RedisObject):
-    def __init__(self, id=None, items=None):
-        super(RedisSet, self).__init__(id)
+    def __init__(self, id=None, item_type=str, items=None, *args):
+        super(RedisSet, self).__init__(id, *args)
+        self.item_type = item_type
 
         if items:
             for item in items:
                 self.add(item)
 
     @classmethod
-    def as_child(cls, parent, tag):
+    def as_child(cls, parent, tag, item_type):
         def helper(_ = None):
-            return cls(parent.id + ':' + tag)
+            return cls(parent.id + ':' + tag, item_type)
         return helper
 
     def __len__(self):

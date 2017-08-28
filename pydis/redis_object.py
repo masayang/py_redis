@@ -43,14 +43,15 @@ class RedisObject(object):
 
     @staticmethod
     def decode_value(type, value):
-        if value is None:
-            return None
+        '''Decode a value if it is non-None, otherwise, decode with no arguments.'''
+
+        if value == None:
+            return type()
         else:
             return type(value)
 
     @staticmethod
     def encode_value(value):
-        if value is None:
-            return str()
-        else:
-            return str(value)
+        '''Encode a value using json.dumps, with default = str'''
+
+        return str(value)
