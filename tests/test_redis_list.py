@@ -110,3 +110,29 @@ class TestRedisList(unittest.TestCase):
         l.append(1)
         l.redis.rpush.assert_called_with('RedisList:list', '1')
 
+    def test_iterator(self):
+        with patch.object(StrictRedis, 'lrange') as mocked_lrange:
+            mocked_lrange.return_value = ['1', '2', '3', '4']
+            l = RedisList('list')
+            results = []
+            for x in l:
+                results.append(x)
+            self.assertEquals(['1', '2', '3', '4'], results)
+
+    @patch('redis.StrictRedis')
+    def test_insert_before(self, StrictRedis):
+        l = RedisList('test_list')
+        l.insert_before('123', '456')
+        l.redis.linsert.assert_called_with('RedisList:test_list', 'BEFORE', '123', '456')
+
+    @patch('redis.StrictRedis')
+    def test_insert_after(self, StrictRedis):
+        l = RedisList('test_list')
+        l.insert_after('123', '456')
+        l.redis.linsert.assert_called_with('RedisList:test_list', 'AFTER', '123', '456')
+
+    @patch('redis.StrictRedis')
+    def test_trim(self, StrictRedis):
+        l = RedisList('test_list')
+        l.trim(5, 10)
+        l.redis.ltrim.assert_called_with('RedisList:test_list', 5, 10)

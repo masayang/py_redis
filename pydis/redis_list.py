@@ -40,7 +40,6 @@ class RedisList(RedisObject):
                 for el in self.redis.lrange(self.id, index.start, index.stop)
             ]
         else:
-            #return RedisObject.decode_value(self.item_type, self.redis.lindex(self.id, index))
             return self.decode_value(self.item_type, self.redis.lindex(self.id, index))
 
     def __setitem__(self, index, val):
@@ -88,3 +87,12 @@ class RedisList(RedisObject):
 
     def append(self, val):
         self.rpush(val)
+
+    def insert_before(self, ref, val):
+        return self.redis.linsert(self.id, 'BEFORE', ref, val)
+
+    def insert_after(self, ref, val):
+        return self.redis.linsert(self.id, 'AFTER', ref, val)
+
+    def trim(self, start, stop):
+        return self.redis.ltrim(self.id, start, stop)

@@ -58,6 +58,7 @@ class TestRedisObject(unittest.TestCase):
             r.delete()
             r.redis.delete.assert_called_with('RedisObject:this is a key')
 
+
     def test_encode_decode(self):
         encoded = RedisObject.encode_value('string')
         self.assertEqual('string', RedisObject.decode_value(str, encoded))
@@ -65,3 +66,6 @@ class TestRedisObject(unittest.TestCase):
         encoded = RedisObject.encode_value(12345)
         self.assertEqual(12345, RedisObject.decode_value(int, encoded))
 
+    def test_encode_decode_none(self):
+        encoded = RedisObject.encode_value(None)
+        self.assertEqual('', RedisObject.decode_value(str, encoded))
