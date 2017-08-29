@@ -8,8 +8,8 @@ load_dotenv(dotenv_path)
 
 
 redis_config = {
-    "host": os.environ.get("REDIS_HOST"),
-    "port": int(os.environ.get("REDIS_PORT")),
-    "db": int(os.environ.get("REDIS_DB")),
-    "password": os.environ.get("REDIS_PASSWORD")
+    "host": os.getenv("REDIS_HOST", "127.0.0.1"),
+    "port": int(os.getenv("REDIS_PORT", "6379")),
+    "db": int(os.getenv("REDIS_DB", "0")),
+    "password": os.getenv("REDIS_PASSWORD", None)
 }

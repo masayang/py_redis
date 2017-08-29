@@ -2,24 +2,16 @@ import unittest
 from mock import patch
 from redis import StrictRedis
 from ..samples import Tweet, TwitterUser
-
-'''
-Those tests involve actual Redis server, so please set those parameters below accordingly.
-'''
-
-HOST = "127.0.0.1"
-PORT = 6379
-DB = 0
-PASSWORD = None
+from ..pydis.redis_settings import redis_config
 
 
 class TestIntegration(unittest.TestCase):
     def setUp(self):
         self.sr = StrictRedis(
-            host=HOST,
-            port=PORT,
-            db=DB,
-            password=PASSWORD
+            host=redis_config['host'],
+            port=redis_config['port'],
+            db=redis_config['db'],
+            password=redis_config['password']
         )
 
     def tearDown(self):
