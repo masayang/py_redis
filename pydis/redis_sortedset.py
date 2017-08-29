@@ -5,8 +5,9 @@ class RedisSortedSet(RedisObject):
         super(RedisSortedSet, self).__init__(id)
 
         if init_items:
-            for key in init_items.keys():
-                self.add(key, init_items[key])
+            for item in init_items:
+                key = item.keys()[0]
+                self.add(item[key], key)
 
     @classmethod
     def as_child(cls, parent, tag):

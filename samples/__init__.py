@@ -1,4 +1,4 @@
-from ..pydis import RedisDict, RedisSet, RedisList
+from ..pydis import RedisDict, RedisSet, RedisList, RedisSortedSet
 from datetime import datetime
 
 class TwitterUser(RedisDict):
@@ -29,3 +29,8 @@ class Tweet(RedisDict):
             },
             defaults=kwargs
         )
+
+class ScoreBoard(RedisSortedSet):
+    def __init__(self, id=None, init_items=None):
+        super(ScoreBoard, self).__init__(id=id, init_items=init_items)
+
