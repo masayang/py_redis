@@ -40,13 +40,3 @@ class RedisSet(RedisObject):
     def members(self):
         return self.redis.smembers(self.id)
 
-'''
-SDIFF
-SDIFFSTORE
-SINTER
-SINTERSTORE
-SMOVE
-SSCAN
-SUNION
-SUNIONSTORE
-'''
