@@ -5,3 +5,5 @@ before_install:
   - sudo apt-get install redis-server
 install: "pip install -r requirements.txt"
 script: nosetests --cover-erase --with-coverage --cover-package=pydis,samples --cover-html
+after_success:
+  - coveralls
