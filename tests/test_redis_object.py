@@ -64,7 +64,7 @@ class TestRedisObject(unittest.TestCase):
     def test_not_equals_non_object(self, StrictRedis):
         r0 = RedisObject('and now for')
         r1 = {'something': 'completely different'}
-        self.assertNotEqual(r1, r0)
+        self.assertFalse(r0.__eq__(r1))
 
     @patch('redis.StrictRedis')
     def test_constructor_without_id(self, StrictRedis):
