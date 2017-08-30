@@ -99,6 +99,3 @@ class TestScoreBoard(unittest.TestCase):
         self.assertEquals(self.board.rank('2017-01'), 1)
         self.assertEquals(self.board.rank('2017-02'), 0)
         self.assertEquals(self.board.rank('2017-03'), 2)
-
-    def test_lexcount(self):
-        self.assertEquals(self.board.lexcount('2', '3'), 0)

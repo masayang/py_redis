@@ -24,17 +24,11 @@ class RedisSortedSet(RedisObject):
     def count(self, min, max):
         return self.redis.zcount(self.id, min, max)
 
-    def lexcount(self, min, max):
-        return self.redis.zlexcount(self.id, min, max)
-
     def incrby(self, value, amount=1):
         self.redis.zincrby(self.id, value, amount)
 
     def range(self, start, end, desc=False):
         return self.redis.zrange(self.id, start, end, desc)
-
-    def rangebylex(self, min, max, start=None, num=None):
-        return self.redis.zrangebylex(self.id, min, max, start, num)
 
     def rangebyscore(self, min, max, start=None, num=None):
         return self.redis.zrangebyscore(self.id, min, max, start, num)
@@ -45,9 +39,6 @@ class RedisSortedSet(RedisObject):
     def rem(self, *values):
         return self.redis.zrem(self.id, *values)
 
-    def remrangebylex(self, min, max):
-        self.redis.zremrangebylex(self.id, min, max)
-
     def remrangebyrank(self, min, max):
         self.redis.zremrangebyrank(self.id, min, max)
 
@@ -57,9 +48,6 @@ class RedisSortedSet(RedisObject):
     def revrange(self, start, end):
         return self.redis.zrevrange(self.id, start, end)
 
-    def revrangebylex(self, start, end):
-        return self.redis.zrevrangebylex(self.id, start, end)
-
     def revrangebyscore(self, start, end):
         return self.redis.zrevrangebyscore(self.id, start, end)
 
@@ -68,6 +56,3 @@ class RedisSortedSet(RedisObject):
 
     def score(self, value):
         return self.redis.zscore(self.id, value)
-
-
-
