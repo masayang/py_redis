@@ -61,6 +61,12 @@ class TestRedisObject(unittest.TestCase):
         self.assertNotEqual(r0, r1)
 
     @patch('redis.StrictRedis')
+    def test_not_equals_non_object(self, StrictRedis):
+        r0 = RedisObject('and now for')
+        r1 = {'something': 'completely different'}
+        self.assertNotEqual(r1, r0)
+
+    @patch('redis.StrictRedis')
     def test_constructor_without_id(self, StrictRedis):
         r = RedisObject('this is a key')
         self.assertEqual(r.__str__(), 'RedisObject:this is a key')
@@ -70,7 +76,6 @@ class TestRedisObject(unittest.TestCase):
             r = RedisObject('this is a key')
             r.delete()
             r.redis.delete.assert_called_with('RedisObject:this is a key')
-
 
     def test_encode_decode(self):
         encoded = RedisObject.encode_value('string')
