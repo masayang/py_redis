@@ -44,10 +44,10 @@ class TestIntegration(unittest.TestCase):
         self.assertEquals(masayang['friends'].members(), set(['TwitterUser:@guest']))
 
         raw_masayang = self.sr.hgetall("TwitterUser:@masayang")
-        self.assertEquals(raw_masayang, {'twitter': '@masayang'})
+        self.assertEquals(raw_masayang, {b'twitter': b'@masayang'})
 
         raw_masayang_friends = self.sr.smembers("TwitterUser:@masayang:friends")
-        self.assertEquals(raw_masayang_friends, set(['TwitterUser:@guest']))
+        self.assertEquals(raw_masayang_friends, set([b'TwitterUser:@guest']))
 
         masayang['score_board'].add('2017-01', 100)
         self.assertEqual(len(masayang['score_board']), 1)
@@ -55,7 +55,7 @@ class TestIntegration(unittest.TestCase):
 
     @patch('os.urandom')
     def test_user_and_tweet_creation(self, urandom):
-        urandom.return_value = '\xd8X\xfa@\x97\x90\x00dr'
+        urandom.return_value = b'\xd8X\xfa@\x97\x90\x00dr'
         masayang = TwitterUser(
             twitter='@masayang'
         )

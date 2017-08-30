@@ -1,6 +1,7 @@
 import unittest
 from ..pydis import RedisDict
 from mock import patch
+from collections import Counter
 
 class TestRedisDict(unittest.TestCase):
     def setUp(self):
@@ -87,11 +88,11 @@ class TestRedisDict(unittest.TestCase):
         results = []
         for kv in d:
             results.append(kv)
-        self.assertEquals(results, [
+        self.assertEquals(Counter(results), Counter([
             ('id', 'test_dict'),
             ('key2', 'string'),
             ('key1', 'string')
-        ])
+        ]))
 
     @patch('redis.StrictRedis')
     def test_delitem(self, StrictRedis):

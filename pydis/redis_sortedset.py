@@ -6,7 +6,7 @@ class RedisSortedSet(RedisObject):
 
         if init_items:
             for item in init_items:
-                key = item.keys()[0]
+                key = list(item.keys())[0]
                 self.add(key, item[key])
 
     @classmethod

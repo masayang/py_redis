@@ -15,7 +15,7 @@ class TestRedisSortedSet(unittest.TestCase):
     @patch('os.urandom')
     @patch('redis.StrictRedis')
     def test_constructor_empty(self, StrictRedis, urandom):
-        urandom.return_value = '\xd8X\xfa@\x97\x90\x00dr'
+        urandom.return_value = b'\xd8X\xfa@\x97\x90\x00dr'
         ss = RedisSortedSet()
         self.assertIsNotNone(ss)
         self.assertEqual(ss.id, u'RedisSortedSet:2Fj6QJeQAGRy')
@@ -23,16 +23,16 @@ class TestRedisSortedSet(unittest.TestCase):
     @patch('os.urandom')
     @patch('redis.StrictRedis')
     def test_constructor_with_items(self, StrictRedis, urandom):
-        urandom.return_value = '\xd8X\xfa@\x97\x90\x00dr'
+        urandom.return_value = b'\xd8X\xfa@\x97\x90\x00dr'
         ss = RedisSortedSet(init_items=[
-            {'2017-01': 10},
-            {'2017-02': 20},
-            {'2017-03': 30}
+            {b'2017-01': 10},
+            {b'2017-02': 20},
+            {b'2017-03': 30}
         ])
         ss.redis.zadd.assert_has_calls([
-            call(u'RedisSortedSet:2Fj6QJeQAGRy', 10, '2017-01'),
-            call(u'RedisSortedSet:2Fj6QJeQAGRy', 20, '2017-02'),
-            call(u'RedisSortedSet:2Fj6QJeQAGRy', 30, '2017-03')])
+            call(u'RedisSortedSet:2Fj6QJeQAGRy', 10, b'2017-01'),
+            call(u'RedisSortedSet:2Fj6QJeQAGRy', 20, b'2017-02'),
+            call(u'RedisSortedSet:2Fj6QJeQAGRy', 30, b'2017-03')])
 
     @patch('redis.StrictRedis')
     def test_count(self, StrictRedis):
@@ -60,9 +60,9 @@ class TestRedisSortedSet(unittest.TestCase):
 
     @patch('redis.StrictRedis')
     def test_revrange(self, StrictRedis):
-        StrictRedis().zrevrange.return_value = "some return value"
+        StrictRedis().zrevrange.return_value = b"some return value"
         ss = RedisSortedSet(id="test_ss", init_items=[{'key': 10}, {'another': 20}])
-        self.assertEquals(ss.revrange(0, -1), "some return value")
+        self.assertEquals(ss.revrange(0, -1), b"some return value")
         ss.redis.zrevrange.assert_called_with('RedisSortedSet:test_ss', 0, -1, withscores=True)
 
     @patch('redis.StrictRedis')
