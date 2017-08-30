@@ -7,7 +7,7 @@ class RedisSortedSet(RedisObject):
         if init_items:
             for item in init_items:
                 key = item.keys()[0]
-                self.add(item[key], key)
+                self.add(key, item[key])
 
     @classmethod
     def as_child(cls, parent, tag):
@@ -19,7 +19,7 @@ class RedisSortedSet(RedisObject):
         return self.redis.zcard(self.id)
 
     def add(self, key, score):
-        self.redis.zadd(self.id, key, score)
+        self.redis.zadd(self.id, score, key)
 
     def count(self, min, max):
         return self.redis.zcount(self.id, min, max)
@@ -28,10 +28,13 @@ class RedisSortedSet(RedisObject):
         self.redis.zincrby(self.id, value, amount)
 
     def range(self, start, end, desc=False):
-        return self.redis.zrange(self.id, start, end, desc)
+        return self.redis.zrange(self.id, start, end, desc, withscores=True)
+
+    def revrange(self, start, end):
+        return self.redis.zrevrange(self.id, start, end, withscores=True)
 
     def rangebyscore(self, min, max, start=None, num=None):
-        return self.redis.zrangebyscore(self.id, min, max, start, num)
+        return self.redis.zrangebyscore(self.id, min, max, start, num, withscores=True)
 
     def rank(self, value):
         return self.redis.zrank(self.id, value)
@@ -45,11 +48,9 @@ class RedisSortedSet(RedisObject):
     def remrangebyscore(self, min, max):
         self.redis.zremrangebyscore(self.id, min, max)
 
-    def revrange(self, start, end):
-        return self.redis.zrevrange(self.id, start, end)
 
     def revrangebyscore(self, start, end):
-        return self.redis.zrevrangebyscore(self.id, start, end)
+        return self.redis.zrevrangebyscore(self.id, start, end, withscores=True)
 
     def revrank(self, value):
         return self.redis.zrevrank(self.id, value)

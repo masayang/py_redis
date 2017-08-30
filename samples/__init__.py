@@ -12,7 +12,8 @@ class TwitterUser(RedisDict):
             fields={
                 'twitter': str,
                 'friends': RedisSet.as_child(self, 'friends', TwitterUser),
-                'tweets': RedisList.as_child(self, 'tweets', Tweet)
+                'tweets': RedisList.as_child(self, 'tweets', Tweet),
+                'score_board': RedisSortedSet.as_child(self, 'score_board')
             },
             defaults=kwargs
         )
