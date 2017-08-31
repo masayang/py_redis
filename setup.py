@@ -1,15 +1,13 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='pydis',
     packages=['pydis'],
-    version='0.2',
+    version='0.5',
     description='Python wrappers for StrictRedis',
     author='masayang',
     author_email='masayang@msushi.com',
     url='https://github.com/masayang/py_redis',
-    download_url='https://github.com/masayang/py_redis/archive/0.2.tar.gz',
-    requires=['redis', 'python_dotenv'],
-    keywords=['redis'],
-    classifiers=[],
+    install_requires=['redis>=2.10', 'python_dotenv>=0.6.5'],
+    zip_safe=False
 )
