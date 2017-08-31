@@ -6,7 +6,7 @@ Python wrappers for StrictRedis inspired by https://blog.jverkamp.com/2015/07/16
 
 ## Installation
 
-pip install -u pydis
+pip install -U pydis
 
 ## Configuration
 
