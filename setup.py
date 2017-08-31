@@ -9,7 +9,7 @@ setup(
     author_email='masayang@msushi.com',
     url='https://github.com/masayang/py_redis',
     download_url='https://github.com/masayang/py_redis/archive/0.1.tar.gz',
-    requires=['redis==2.10.6', 'python_dotenv==0.6.5'],
+    requires=['redis', 'python_dotenv'],
     keywords=['redis'],
     classifiers=[],
 )
