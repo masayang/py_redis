@@ -68,5 +68,8 @@ class RedisObject(object):
 
     @staticmethod
     def encode_value(value):
-        '''Encode a value using str'''
+        if value.__class__ == str:
+            return value
+        if value.__class__ == unicode:
+            return value
         return str(value)
