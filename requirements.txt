@@ -20,4 +20,4 @@ python-dotenv==0.6.5
 redis==2.10.6
 requests==2.18.4
 six==1.10.0
-urllib3==1.22
+urllib3==1.26.5
