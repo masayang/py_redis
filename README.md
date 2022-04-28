@@ -15,3 +15,6 @@ See redis_settings.py for detail.
 ## Usage
 
 See samples/__init__.py
+
+## test
+python -m pytest --cov-report term-missing --cov=pydis 
