@@ -59,3 +59,7 @@ class TestRedisObject:
 
         encoded = RedisObject.encode_value(12345)
         assert 12345 == RedisObject.decode_value(int, encoded)
+
+    def test_encode_decode_none(self):
+        encoded = RedisObject.encode_value(None)
+        assert RedisObject.decode_value(str, encoded) == 'None'

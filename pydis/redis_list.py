@@ -1,4 +1,4 @@
-from . import RedisObject
+from .redis_object import RedisObject
 
 class RedisList(RedisObject):
     '''
