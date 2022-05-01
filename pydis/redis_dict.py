@@ -99,24 +99,3 @@ class RedisDict(RedisObject):
         '''
         return self.redis.hvals(self.id)
 
-
-if __name__ == '__main__':
-    d = RedisDict(id='test_dict', fields={
-        'int_val': int,
-        'str_val': str
-    }, defaults={
-        'str_val': 'string'
-    })
-    print(d.id)
-    print(d.fields)
-    print(d['str_val'])
-
-    d = RedisDict(id='test_dict2', fields={
-            'int_val': int,
-            'str_val': str,
-            'another': str
-        })
-    d['int_val'] = 1
-    d.incrby('int_val', 10000)
-    print(d['int_val'])  
-    print(d.keys(), d.values()) 

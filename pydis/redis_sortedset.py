@@ -1,4 +1,4 @@
-from . import RedisObject
+from .redis_object import RedisObject
 
 class RedisSortedSet(RedisObject):
     '''
@@ -41,7 +41,7 @@ class RedisSortedSet(RedisObject):
         :param score:
         :return:
         '''
-        self.redis.zadd(self.id, score, key)
+        self.redis.zadd(self.id, {key: score})
 
     def count(self, min, max):
         '''
@@ -54,7 +54,7 @@ class RedisSortedSet(RedisObject):
         '''
         Increment the score of value in sortedset by amount
         '''
-        return self.redis.zincrby(self.id, value, amount)
+        return self.redis.zincrby(self.id, amount, value)
 
     def range(self, start, end, desc=False):
         '''
@@ -124,3 +124,4 @@ class RedisSortedSet(RedisObject):
         Return the score of element value in sorted set
         '''
         return self.redis.zscore(self.id, value)
+
