@@ -9,7 +9,7 @@ phases:
       - pip install -r requirements.txt
       - apt update
       - apt install -y redis-server
-      - /usr/bin/redis-server --port 30073 --requirepass mypassword
+      - /usr/bin/redis-server --port 30073 --requirepass mypassword &
   pre_build:
     commands:
   build:
