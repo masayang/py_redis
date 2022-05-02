@@ -1,4 +1,7 @@
-from ..pydis import RedisDict, RedisSet, RedisList, RedisSortedSet
+from pydis.redis_dict import RedisDict
+from pydis.redis_set import RedisSet
+from pydis.redis_list import RedisList
+from pydis.redis_sortedset import RedisSortedSet
 from datetime import datetime
 
 class TwitterUser(RedisDict):
