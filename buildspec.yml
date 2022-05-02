@@ -5,14 +5,12 @@ phases:
     runtime-versions:
       python: 3.7
     commands:
-      - pip3 install pipenv
-      - pipenv install --ignore-pipfile
       - pip install -r requirements.txt
   pre_build:
     commands:
   build:
     commands:
-      - pipenv run python -m pytest  --cov=pydis
+      - python -m pytest  --cov=pydis
   post_build:
     commands:
       - echo Build completed on `date`
