@@ -8,7 +8,6 @@ phases:
     commands:
       - pip3 install pipenv
       - pipenv install --ignore-pipfile
-      - pipenv shell
       - python -m pytest --cov-report html --cov=pydis -s -v
   build:
     commands:
