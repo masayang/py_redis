@@ -6,7 +6,8 @@ phases:
       python: 3.7
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - pip3 install pipenv
+      - pipenv install --ignore-pipfile
   build:
     commands:
       - echo Build started on `date`
