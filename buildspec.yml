@@ -8,7 +8,7 @@ phases:
     commands:
       - pip3 install pipenv
       - pipenv install --ignore-pipfile
-      - python -m pytest --cov-report html --cov=pydis -s -v
+      - pipenv run python -m pytest  --cov=pydis
   build:
     commands:
       - echo Build started on `date`
