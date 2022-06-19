@@ -3,3 +3,4 @@ cover/
 .idea/
 *.pyc
 .env
+dist/
