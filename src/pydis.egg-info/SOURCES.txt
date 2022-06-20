@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+src/pydis/__init__.py
+src/pydis/redis_dict.py
+src/pydis/redis_list.py
+src/pydis/redis_object.py
+src/pydis/redis_set.py
+src/pydis/redis_settings.py
+src/pydis/redis_sortedset.py
+src/pydis.egg-info/PKG-INFO
+src/pydis.egg-info/SOURCES.txt
+src/pydis.egg-info/dependency_links.txt
+src/pydis.egg-info/requires.txt
+src/pydis.egg-info/top_level.txt

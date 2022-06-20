@@ -1,3 +1,18 @@
+Metadata-Version: 2.1
+Name: pydis
+Version: 0.8.1
+Summary: Python wrappers for StrictRedis
+Home-page: https://github.com/masayang/py_redis
+Author: Masa Nakamura
+Author-email: masayang@hotmail.com
+Project-URL: Bug Tracker, https://github.com/masayang/py_redis/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # pydis
 
 Python wrappers for StrictRedis inspired by https://blog.jverkamp.com/2015/07/16/automagically-storing-python-objects-in-redis/
