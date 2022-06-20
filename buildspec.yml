@@ -4,12 +4,17 @@ phases:
   install:
     runtime-versions:
       python: 3.7
+    commands:
+      - uname -a
+      - pip install -r requirements.txt
+      - apt update
+      - apt install -y redis-server
+      - /usr/bin/redis-server --port 30073 --requirepass mypassword &
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
   build:
     commands:
-      - echo Build started on `date`
+      - python -m pytest  --cov=pydis
   post_build:
     commands:
       - echo Build completed on `date`
