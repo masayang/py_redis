@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pydis
-Version: 0.7.1
+Version: 0.8.1
 Summary: Python wrappers for StrictRedis
 Home-page: https://github.com/masayang/py_redis
 Author: Masa Nakamura
@@ -29,7 +29,7 @@ See redis_settings.py for detail.
 
 ## Usage
 
-See samples/__init__.py
+See tests/sample.py
 
 ## test
 python -m pytest --cov-report term-missing --cov=pydis 
