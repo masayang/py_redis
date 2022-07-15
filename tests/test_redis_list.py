@@ -1,6 +1,6 @@
 from pydis.redis_list import RedisList
 import pytest
-
+import uuid
 
 
 class TestRedisDict:
@@ -130,3 +130,9 @@ class TestRedisDict:
         assert l[0] == 2
         assert l[1] == 3
         assert len(l) == 2
+
+    def test_connection_pool(self, resource):
+        for i in range(0, 40000):
+            l = RedisList('list', item_type=str)            
+            l.append(uuid.uuid4().__str__())
+        assert len(l) == 40000

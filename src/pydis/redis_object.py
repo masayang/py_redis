@@ -4,6 +4,19 @@ import os
 from .redis_settings import redis_config
 
 
+global redis_pool
+global connection_pool_pid
+connection_pool_pid = f"PID {os.getpid()}: initializing redis connection pool..."
+print(connection_pool_pid)
+redis_pool = redis.ConnectionPool(
+    host=redis_config['host'],
+    port=redis_config['port'],
+    db=redis_config['db'],
+    password=redis_config['password'],
+    decode_responses=True
+)
+
+
 class RedisObject(object):
     '''
     A base object backed by redis.
@@ -18,12 +31,8 @@ class RedisObject(object):
 
         :param id: (optional) If specified, use this as the redis ID, otherwise generate a random ID.
         '''
-        self.redis = redis.StrictRedis(
-            host=redis_config['host'],
-            port=redis_config['port'],
-            db=redis_config['db'],
-            password=redis_config['password'],
-            decode_responses=True)
+        self.redis = redis.StrictRedis(connection_pool=redis_pool)
+        self.connection_pool_pid = connection_pool_pid
 
         self.id = id if id else base64.urlsafe_b64encode(os.urandom(9)).decode('utf-8')
         if ':' not in self.id:

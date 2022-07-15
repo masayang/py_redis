@@ -6,6 +6,8 @@ class TestRedisObject:
     def test_constructor_without_id(self, resource):
         r = RedisObject()
         assert r.id != ""
+        assert r.connection_pool_pid.startswith("PID ")
+        assert r.connection_pool_pid.endswith(": initializing redis connection pool...")
 
     def test_constructor_with_id(self, resource):
         r = RedisObject(id='i_have_an_id')
